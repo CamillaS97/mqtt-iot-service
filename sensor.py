@@ -12,10 +12,8 @@ import time
 import logging,random,os
 import sys,getopt
 #from mqtt_functions import *
+
 options=dict()
-brokers=["192.168.1.206","192.168.1.157","192.168.1.204","192.168.1.185","test.mosquitto.org",\
-         "broker.hivemq.com","iot.eclipse.org"]
-options["broker"]=brokers[1]
 options["port"]=1883
 options["verbose"]=False
 options["username"]=""
