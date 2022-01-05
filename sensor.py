@@ -5,13 +5,11 @@
 ##email steve@steves-internet-guide.com
 ###Free to use for any purpose
 import paho.mqtt.client as mqtt
-#import testclient as mqtt
 import json
 import os
 import time
 import logging,random,os
 import sys,getopt
-#from mqtt_functions import *
 
 options=dict()
 options["port"]=1883
@@ -122,6 +120,7 @@ def on_connect(client, userdata, flags, rc):
         client.subscribe(options["topics"])
     else:
         client.bad_connection_flag=True 
+        
 def on_disconnect(client, userdata, rc):
     logging.debug("disconnecting reason  " + str(rc))
     client.connected_flag=False
@@ -153,9 +152,6 @@ def publish_status(client):
         client.last_pub_time=time.time()
         client.sensor_status_old=client.sensor_status
 
-        
-
-    
 
 def Initialise_client_object():
     mqtt.Client.last_pub_time=time.time()
@@ -179,8 +175,6 @@ def Initialise_clients(cname):
     client.on_connect= on_connect        #attach function to callback
     client.on_message=on_message        #attach function to callback
     client.on_disconnect=on_disconnect
-    #client.on_subscribe=on_subscribe
-    #client.on_publish=on_publish
     return client
 
 def Connect(client,broker,port,keepalive,run_forever=False):
@@ -224,6 +218,7 @@ def Connect(client,broker,port,keepalive,run_forever=False):
         time.sleep(delay)
                 
     return 0
+
 def wait_for(client,msgType,period=.25,wait_time=40,running_loop=False):
     #running loop is true when using loop_start or loop_forever
     client.running_loop=running_loop #
